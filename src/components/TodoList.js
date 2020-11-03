@@ -51,7 +51,7 @@ function TodoList() {
     <div>
       <h1>To Do List</h1>
       <TodoForm onSubmit={addTodo}/>
-      <h1>My Task</h1>
+      <h1>My Task</h1>{}
       <Todo 
       todos={todos} 
       completeTodo={completeTodo} 
