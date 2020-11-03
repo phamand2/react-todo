@@ -16,7 +16,14 @@ function TodoList() {
 
     setTodos(newTodos)
     console.log(todo, ...todos)
+  }
 
+  const updateTodo = (todoId, newValue) => {
+    if(!newValue.text){
+      return
+    }
+
+    setTodos(prev => prev.map(item =>(item.id === todoId ? newValue : item)))
   }
 
   const completeTodo = (id) => {
@@ -33,7 +40,7 @@ function TodoList() {
   // Remove a task
   const removeTodo = (id) => {
     // create a new array from the spread operator todos to filter out if the id is not in the array.
-    const removeList = [...todos].filter(todo=>todo.id !== id)
+    const removeList = todos.filter(todo=>todo.id !== id)
 
     setTodos(removeList)
   }
@@ -44,7 +51,12 @@ function TodoList() {
     <div>
       <h1>To Do List</h1>
       <TodoForm onSubmit={addTodo}/>
-      <Todo todos={todos} completeTodo={completeTodo} removeTodo={removeTodo} />
+      <h1>My Task</h1>
+      <Todo 
+      todos={todos} 
+      completeTodo={completeTodo} 
+      removeTodo={removeTodo} 
+      updateTodo={updateTodo} />
     </div>
   )
 }
