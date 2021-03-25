@@ -1,47 +1,75 @@
-import React, { useState } from 'react'
-import TodoForm from './TodoForm'
-
+import { Button, Grid } from "@material-ui/core";
+import React, { useState } from "react";
+import TodoForm from "./TodoForm";
 
 // Deconstruct the functions/variable
 function Todo({ todos, completeTodo, removeTodo, updateTodo }) {
-
   const [edit, setEdit] = useState({
     id: null,
-    value: ''
-  })
+    value: "",
+  });
 
-  const submitUpdate = value => {
-    updateTodo(edit.id, value)
+  const submitUpdate = (value) => {
+    updateTodo(edit.id, value);
     setEdit({
       id: null,
-      value: ''
-    })
-  }
+      value: "",
+    });
+  };
 
   if (edit.id) {
-    return <TodoForm edit={edit} onSubmit={submitUpdate}/>
+    return <TodoForm edit={edit} onSubmit={submitUpdate} />;
   }
 
-  return todos.map((todo, index) => (
-  <>
+  const toDoList = todos.map((todo, index) => {
+    return (
+      <Grid>
+        <Grid
+          item
+          className={todo.isComplete ? "todo-row complete" : "todo-row"}
+          key={index}
+        >
+          <Grid
+            direction="row"
+            container
+            justify="space-around"
+            alignItems="center"
+          >
+            <p style={{fontSize: 24}}>{todo.text}</p>
+            <Grid item container direction="row" justify="space-around">
+              <Button
+                variant="contained"
+                color="secondary"
+                onClick={() => removeTodo(todo.id)}
+              >
+                Remove
+              </Button>
+              <Button
+                variant="contained"
+                color="default"
+                onClick={() => setEdit({ id: todo.id, value: todo.text })}
+              >
+                Edit
+              </Button>
+              <Button
+                variant="contained"
+                color="primary"
+                onClick={() => completeTodo(todo.id)}
+              >
+                Complete
+              </Button>
+            </Grid>
+          </Grid>
+        </Grid>
+      </Grid>
+    );
+  });
 
-    <ul>
-      <li>
-
-        <div className={todo.isComplete ? 'todo-row complete' : 'todo-row'} key={index}>
-          <div key={todo.id}>
-            {todo.text}
-            <button onClick={() => removeTodo(todo.id)}>Remove</button>
-            <button onClick={() => setEdit({ id: todo.id, value: todo.text })}>Edit</button>
-            <button onClick={() => completeTodo(todo.id)}>Complete</button>
-          </div>
-        </div>
-
-      </li>
-    </ul>
-
-  </>
-  ))
+  return (
+    <Grid container direction="column" justify="center" alignItems="center">
+      {toDoList}
+    </Grid>
+  );
 }
 
-export default Todo
+export default Todo;
