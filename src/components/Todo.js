@@ -40,7 +40,7 @@ function Todo({ todos, completeTodo, removeTodo, updateTodo }) {
               <Button
                 variant="contained"
                 color="secondary"
-                onClick={() => removeTodo(todo.id)}
+                onClick={() => removeTodo(index)}
               >
                 Remove
               </Button>

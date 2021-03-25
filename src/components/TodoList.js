@@ -40,9 +40,9 @@ function TodoList() {
   };
 
   // Remove a task
-  const removeTodo = (id) => {
+  const removeTodo = (index) => {
     // create a new array from the spread operator todos to filter out if the id is not in the array.
-    const removeList = todos.filter((todo) => todo.id !== id);
+    const removeList = todos.filter((todo, todoIndex) => todoIndex !== index);
 
     setTodos(removeList);
   };
