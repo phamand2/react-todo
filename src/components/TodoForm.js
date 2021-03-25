@@ -18,7 +18,7 @@ function TodoForm(props) {
 
     props.onSubmit({
       id: uuid_v4(),
-      text: input
+      text: input.trim()
     });
 
     // Empty the input box after submit
